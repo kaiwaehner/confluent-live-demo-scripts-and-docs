@@ -9,7 +9,7 @@ TODO
 confluent
 confluent status
 confluent start schema-registry 
-cat  /Users/kai.waehner/git-projects/ksql/config/ksql-server.properties
+# cat  /Users/kai.waehner/git-projects/ksql/config/ksql-server.properties
 
 /Users/kai.waehner/git-projects/ksql/bin/ksql-server-start /Users/kai.waehner/git-projects/ksql/config/ksql-server.properties 
 
@@ -40,7 +40,6 @@ SELECT pageid, userid FROM pageviews_original LIMIT 10;
 #EXPLAIN QUERY pageviews_original;
 
 
-LIST TOPICS;
 PRINT 'users' FROM BEGINNING;
 
 CREATE TABLE users_original (registertime bigint, gender varchar, regionid varchar, userid varchar) WITH (kafka_topic='users', value_format='JSON', key = 'userid');
@@ -52,7 +51,12 @@ DESCRIBE users_original;
 SELECT * FROM users_original LIMIT 10;
 
 CREATE TABLE FEMALEUSERS AS SELECT * from users_original WHERE gender = 'FEMALE';
-SELECT * FROM users_original WHERE gender = 'MALE' LIMIT 3;
+
+LIST TOPICS;
+
+SELECT * FROM FEMALEUSERS LIMIT 3;
+
+#SELECT * FROM users_original WHERE gender = 'MALE' LIMIT 3;
 
 #CREATE STREAM pageviews_female AS SELECT users_original.userid AS userid, pageid, regionid, gender FROM pageviews_original LEFT JOIN users_original ON pageviews_original.userid = users_original.userid WHERE gender = 'FEMALE';
 
@@ -64,10 +68,10 @@ PRINT 'ratings' FROM BEGINNING;
 
 CREATE STREAM ratings WITH (KAFKA_TOPIC='ratings', VALUE_FORMAT='AVRO');
 
-DESCRIBE ratings;
+#DESCRIBE ratings;
 DESCRIBE EXTENDED ratings;
 SELECT * FROM ratings LIMIT 10;
-SELECT * FROM ratings WHERE stars <= 3 LIIMT 2;
+SELECT * FROM ratings WHERE stars <= 3 LIMIT 2;
   
 exit
 confluent destroy
