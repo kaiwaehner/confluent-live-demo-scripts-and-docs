@@ -1,3 +1,6 @@
+# do-it-live script
+# doitlive play ksql-live-demo.sh -s 3 --shell /bin/zsh
+
 TODO 
 => Not working within KSQL CLI... Need another solution.
 => Running generators in background process also not working (shows new data generated all the time)
@@ -17,8 +20,7 @@ cat  /Users/kai.waehner/git-projects/ksql/config/ksql-server.properties
 /Users/kai.waehner/confluent-4.1.0/bin/ksql-datagen quickstart=ratings format=avro topic=ratings maxInterval=500
 
 
-# do-it-live script
-# doitlive play ksql-live-demo.sh -s 3 --shell /bin/zsh
+
 
 /Users/kai.waehner/git-projects/ksql/bin/ksql http://localhost:8088  
   
